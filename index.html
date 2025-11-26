@@ -74,6 +74,10 @@
 
       function DSAThumbnails() {
         const [currentIndex, setCurrentIndex] = React.useState(0);
+        const scrollerRef = React.useRef(null);
+        const [thumb, setThumb] = React.useState({ w: 80, x: 0 });
+        const startXRef = React.useRef(0);
+        const startLeftRef = React.useRef(0);
 
         const topics = [
           { title: 'Pattern Printing', subtitle: 'Master Loops & Logic', color: 'from-purple-600 to-pink-600', icon: '🎯', time: '15 min', realLife: 'Building game boards, UI grids' },
@@ -94,6 +98,20 @@
           { title: 'Dynamic Programming', subtitle: 'Optimization Technique', color: 'from-fuchsia-600 to-pink-600', icon: '🧠', time: '15 min', realLife: 'Route planning, stock trading' },
           { title: 'Graphs', subtitle: 'Network of Nodes', color: 'from-sky-600 to-blue-600', icon: '🕸️', time: '15 min', realLife: 'Social media, Google Maps' }
         ];
+
+        function updateSlider(){
+          const el = scrollerRef.current; if(!el) return;
+          const trackW = el.clientWidth; const total = el.scrollWidth; const visible = el.clientWidth;
+          const ratio = visible/Math.max(1,total);
+          const w = Math.max(40, trackW * ratio);
+          const maxX = Math.max(0, trackW - w);
+          const x = maxX * (el.scrollLeft/Math.max(1,total - visible));
+          setThumb({ w, x });
+        }
+        React.useEffect(()=>{ updateSlider(); const onResize=()=>updateSlider(); window.addEventListener('resize', onResize); return ()=>window.removeEventListener('resize', onResize); },[]);
+        function startDrag(e){ startXRef.current = e.clientX; startLeftRef.current = thumb.x; document.addEventListener('mousemove', onDrag); document.addEventListener('mouseup', endDrag); }
+        function onDrag(e){ const el=scrollerRef.current; if(!el) return; const trackW=el.clientWidth; const total=el.scrollWidth; const visible=el.clientWidth; const w=thumb.w; const maxX=Math.max(0, trackW - w); let nx=Math.min(Math.max(0, startLeftRef.current + (e.clientX - startXRef.current)), maxX); const sl=(nx/maxX) * Math.max(0, total - visible); el.scrollLeft = sl; setThumb({ w, x: nx }); }
+        function endDrag(){ document.removeEventListener('mousemove', onDrag); document.removeEventListener('mouseup', endDrag); }
 
         function nextSlide() {
           setCurrentIndex((prev) => (prev + 1) % topics.length);
@@ -235,7 +253,7 @@
               <div className="frosted rounded-xl px-4 py-3 max-w-5xl mx-auto text-white shadow-lg">
                 <div className="flex items-center justify-between">
                   <a href="index.html" className="font-black tracking-wide" aria-label="Home">Cat_Catch_Code</a>
-                  <div className="flex-1 overflow-x-auto ml-4">
+                  <div ref={scrollerRef} onScroll={updateSlider} onWheel={(e)=>{const el=scrollerRef.current; if(!el) return; el.scrollLeft+=e.deltaY; updateSlider();}} className="flex-1 overflow-x-auto ml-4">
                     <div className="flex gap-2 min-w-max">
                       {topics.map(t => (
                         <a key={t.title} href={pageUrl(t.title)} className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-sm whitespace-nowrap" aria-label={`Open ${t.title} tutorial`}>
@@ -244,6 +262,9 @@
                       ))}
                     </div>
                   </div>
+                </div>
+                <div className="mt-2 h-1 bg-white/10 rounded relative select-none">
+                  <div onMouseDown={startDrag} style={{width: thumb.w, transform: `translateX(${thumb.x}px)`}} className="absolute top-0 h-1 bg-white/60 rounded cursor-ew-resize"></div>
                 </div>
               </div>
             </div>
