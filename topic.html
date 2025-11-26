@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cat_Catch_Code Topic</title>
+    <script>
+      tailwind = { config: { safelist: [
+        'from-purple-600','to-pink-600','from-blue-600','to-cyan-600','from-green-600','to-teal-600','from-orange-600','to-red-600','from-indigo-600','to-purple-600','from-yellow-600','to-orange-600','from-pink-600','to-rose-600','from-red-600','to-pink-600','from-cyan-600','to-blue-600','from-teal-600','to-green-600','from-blue-600','to-indigo-600','from-green-600','to-emerald-600','from-emerald-600','to-teal-600','from-orange-600','to-amber-600','from-violet-600','to-purple-600','from-fuchsia-600','to-pink-600','from-sky-600','to-blue-600'
+      ] } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .liquid-overlay{position:absolute;inset:0;border-radius:1.5rem;pointer-events:none;mix-blend:normal}
+      .liquid-overlay::before{content:"";position:absolute;inset:-20%;background:conic-gradient(from 180deg at 50% 50%,rgba(255,255,255,0.25),rgba(255,255,255,0) 30%,rgba(255,255,255,0.35) 60%,rgba(255,255,255,0) 85%);filter:blur(40px);opacity:.6;animation:blobMove 10s linear infinite}
+      .liquid-overlay::after{content:"";position:absolute;inset:-10%;background:radial-gradient(60% 60% at 20% 20%,rgba(255,255,255,0.25),rgba(255,255,255,0));filter:blur(30px);opacity:.5;animation:blobDrift 12s ease-in-out infinite}
+      @keyframes blobMove{0%{transform:translate3d(-10px,-10px,0) rotate(0deg)}50%{transform:translate3d(10px,10px,0) rotate(180deg)}100%{transform:translate3d(-10px,-10px,0) rotate(360deg)}}
+      @keyframes blobDrift{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(15px,-10px,0) scale(1.05)}100%{transform:translate3d(0,0,0) scale(1)}}
+      .frosted{backdrop-filter:saturate(140%) blur(14px);background:rgba(255,255,255,.08)}
+      .aspect-video{aspect-ratio:16/9}
+      @media (prefers-reduced-motion: reduce){.liquid-overlay::before,.liquid-overlay::after{animation:none}}
+    </style>
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
+    <div class="max-w-7xl mx-auto p-6 text-white">
+      <div class="sticky top-0 z-20 mb-6">
+        <div class="frosted rounded-xl px-4 py-3 text-white shadow-lg">
+          <div class="flex items-center justify-between">
+            <a href="index.html" class="font-black tracking-wide" aria-label="Home">Cat_Catch_Code</a>
+            <div class="flex gap-3">
+              <a href="index.html" class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-sm sm:text-base">Home</a>
+              <a id="openVideo" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 rounded-full text-sm sm:text-base">Open Video</a>
+              <a id="downloadThumb" class="px-4 py-2 bg-white text-purple-900 hover:bg-purple-100 rounded-full text-sm sm:text-base">Download Thumbnail</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="content"></div>
+    </div>
+    <script>
+      function colorHex(name){
+        const m={'purple-600':'#9333EA','pink-600':'#DB2777','blue-600':'#2563EB','cyan-600':'#0891B2','green-600':'#16A34A','teal-600':'#0D9488','orange-600':'#EA580C','red-600':'#DC2626','indigo-600':'#4F46E5','yellow-600':'#CA8A04','rose-600':'#E11D48','emerald-600':'#059669','amber-600':'#D97706','violet-600':'#7C3AED','fuchsia-600':'#C026D3','sky-600':'#0284C7'};
+        return m[name]||'#9333EA';
+      }
+      function fileUrl(title){return `thumbnail/${encodeURIComponent(title)}.png`;}
+      function pageUrl(title){return `topic.html?t=${encodeURIComponent(title)}`;}
+      const topics=[
+        { title:'Pattern Printing', subtitle:'Master Loops & Logic', color:'from-purple-600 to-pink-600', icon:'🎯', time:'15 min', realLife:'Building game boards, UI grids' },
+        { title:'Basics of Programming', subtitle:'Variables, Operators & Logic', color:'from-blue-600 to-cyan-600', icon:'💡', time:'15 min', realLife:'Calculator apps, basic automation' },
+        { title:'Arrays', subtitle:'Linear Data Storage', color:'from-green-600 to-teal-600', icon:'📦', time:'15 min', realLife:'Shopping carts, playlists' },
+        { title:'Searching & Sorting', subtitle:'Binary Search & More', color:'from-orange-600 to-red-600', icon:'🔍', time:'15 min', realLife:'Phone contacts, Netflix recommendations' },
+        { title:'Strings', subtitle:'Text Processing Magic', color:'from-indigo-600 to-purple-600', icon:'📝', time:'15 min', realLife:'Chat apps, search engines' },
+        { title:'Pointers', subtitle:'Memory & References', color:'from-yellow-600 to-orange-600', icon:'🎪', time:'15 min', realLife:'GPS navigation, memory management' },
+        { title:'Recursion', subtitle:'Function Calling Itself', color:'from-pink-600 to-rose-600', icon:'🔄', time:'15 min', realLife:'File explorer, factorial calculations' },
+        { title:'Backtracking', subtitle:'Trial & Error Approach', color:'from-red-600 to-pink-600', icon:'🧩', time:'15 min', realLife:'Sudoku solver, maze navigation' },
+        { title:'Linked Lists', subtitle:'Dynamic Data Chains', color:'from-cyan-600 to-blue-600', icon:'⛓️', time:'15 min', realLife:'Browser history, train coaches' },
+        { title:'Stacks', subtitle:'Last In First Out', color:'from-teal-600 to-green-600', icon:'📚', time:'15 min', realLife:'Undo/Redo, plates in cafeteria' },
+        { title:'Queues', subtitle:'First In First Out', color:'from-blue-600 to-indigo-600', icon:'🎫', time:'15 min', realLife:'Print queue, ticket booking' },
+        { title:'Binary Trees', subtitle:'Hierarchical Data', color:'from-green-600 to-emerald-600', icon:'🌳', time:'15 min', realLife:'File systems, family trees' },
+        { title:'Binary Search Trees', subtitle:'Sorted Tree Structure', color:'from-emerald-600 to-teal-600', icon:'🔍🌳', time:'15 min', realLife:'Phone directory, autocomplete' },
+        { title:'Heaps', subtitle:'Priority Management', color:'from-orange-600 to-amber-600', icon:'⛰️', time:'15 min', realLife:'Task schedulers, hospital ER' },
+        { title:'Tries', subtitle:'Prefix Tree Search', color:'from-violet-600 to-purple-600', icon:'🔤', time:'15 min', realLife:'Search suggestions, spell checkers' },
+        { title:'Dynamic Programming', subtitle:'Optimization Technique', color:'from-fuchsia-600 to-pink-600', icon:'🧠', time:'15 min', realLife:'Route planning, stock trading' },
+        { title:'Graphs', subtitle:'Network of Nodes', color:'from-sky-600 to-blue-600', icon:'🕸️', time:'15 min', realLife:'Social media, Google Maps' }
+      ];
+      const lectures={
+        'Pattern Printing':['L1-Pattern Printing','L2-Pattern Printing','L3-Pattern Printing','DS-Pattern Printing','MS-Pattern Printing'],
+        'Basics of Programming':['L1-Basics of Programming','L2-Basics of Programming','L3-Basics of Programming','DC-Basics of Programming','MS-Basics of Programming'],
+        'Arrays':['L1-Basic Maths Problems','L1-Arrays','L2-Arrays','L3-Arrays','L4-Arrays','DS-Maths + Array Basics','MS-Maths Basics','DS-Arrays','MS-Arrays'],
+        'Searching & Sorting':['L1-Binary Search','L2-Binary Search','L3-Binary Search','DS-Searching & Sorting','MS-SnS'],
+        'Strings':['L1-Strings','L2-Strings','L3-Strings','DS: Strings','MS: Strings'],
+        'Pointers':['L1-Pointers','L2-Pointers'],
+        'Recursion':['L1-Recursion','L2-Recursion','L3-Recursion','DS: Recursion'],
+        'Backtracking':['L1- BT and DnC','L2- BT and DnC','L3 - BT and DnC','L4 - BT and DnC','DS: DnC','MS: DnC'],
+        'Linked Lists':['L1 - Linked Lists','L3 - Linked Lists','L4 - Linked Lists','DS: LL','MS: LL'],
+        'Stacks':['L1 - Stacks','L2 - Stacks','DS: Stacks','MS: Stacks'],
+        'Queues':['L1 - Queues','L2 - Queues','L3 - Queues','DS: Queue'],
+        'Binary Trees':['L1 - Trees','L2 - Trees','L3 - Trees','DS: Trees','MS: Trees'],
+        'Binary Search Trees':['L1 - BST','L2 - BST','L3 - BST','DS - BST','MS: BST'],
+        'Heaps':['L1 - Heaps','L2 - Heaps','L3 - Heaps','DS: Heap','MS: Heap'],
+        'Tries':['L2 - Maps n Tries','L3 - Maps n Tries','DS: Maps n Tries','MS: Maps n Tries'],
+        'Dynamic Programming':['L1 - DP','L2 - DP','L3 - DP','L4 - DP','DS: DP L1','DS: DP L2','MS: DP'],
+        'Graphs':['L1 - Graphs','L2 - Graphs','L3 - Graphs','L8 - Graphs','L9 - Graphs','L11 - Graphs','DS: Graphs [Concepts]','DS: Graphs - 2','MS: Graph']
+      };
+      const params=new URLSearchParams(location.search);
+      const t=params.get('t')||topics[0].title;
+      const info=topics.find(x=>x.title===t)||topics[0];
+      document.title=`${info.title} – Cat_Catch_Code`;
+      const content=document.getElementById('content');
+      content.innerHTML=`
+        <div class="max-w-6xl mx-auto">
+          <div class="mb-8 px-2">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-black mb-2">${info.title}</h1>
+            <p class="text-base sm:text-lg text-purple-200">${info.subtitle}</p>
+          </div>
+          <div class="relative bg-gradient-to-br ${info.color} rounded-3xl shadow-2xl overflow-hidden aspect-video">
+            <img src="${fileUrl(info.title)}" alt="${info.title}" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="liquid-overlay"></div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8 px-2">
+            <div class="lg:col-span-2 space-y-6">
+              <div class="bg-white/10 rounded-2xl p-6">
+                <h2 class="text-2xl font-bold mb-4">Overview</h2>
+                <p class="text-sm text-purple-200">${info.realLife}</p>
+              </div>
+              <div class="bg-white/10 rounded-2xl p-6">
+                <h2 class="text-2xl font-bold mb-4">Code Logic</h2>
+                <pre class="bg-black/40 rounded-xl p-4 overflow-auto text-sm">Add code explanation and samples here</pre>
+              </div>
+              <div class="bg-white/10 rounded-2xl p-6">
+                <h2 class="text-2xl font-bold mb-4">Documentation</h2>
+                <div class="text-sm">Add detailed documentation here</div>
+              </div>
+            </div>
+            <div>
+              <div class="bg-white/10 rounded-2xl p-6">
+                <h2 class="text-xl font-bold mb-4">Lectures</h2>
+                <ul id="lectures" class="space-y-2"></ul>
+              </div>
+              <div class="bg-white/10 rounded-2xl p-6 mt-6">
+                <h2 class="text-xl font-bold mb-4">Video</h2>
+                <div class="aspect-video rounded-xl overflow-hidden bg-black/30">
+                  <iframe id="ytFrame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-10 text-center">
+            <a href="index.html" class="px-6 py-3 bg-white text-purple-900 rounded-full font-bold text-sm sm:text-base">Back to Home</a>
+          </div>
+        </div>
+      `;
+      const list=document.getElementById('lectures');
+      (lectures[info.title]||[]).forEach(name=>{
+        const li=document.createElement('li');
+        const a=document.createElement('a');
+        a.href='#';
+        a.textContent=name;
+        a.className='block px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg';
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+      const v=params.get('v');
+      const frame=document.getElementById('ytFrame');
+      if(v){frame.src=`https://www.youtube.com/embed/${encodeURIComponent(v)}`;} else {frame.removeAttribute('src');}
+      const openVideo=document.getElementById('openVideo');
+      openVideo.href= v ? `https://www.youtube.com/watch?v=${encodeURIComponent(v)}` : '#';
+      openVideo.target= v ? '_blank' : '';
+      const downloadThumb=document.getElementById('downloadThumb');
+      downloadThumb.onclick=async ()=>{
+        const url=fileUrl(info.title);
+        try{const r=await fetch(url,{method:'HEAD'});if(r.ok){const a=document.createElement('a');a.href=url;a.download=`${info.title}.png`;document.body.appendChild(a);a.click();a.remove();return;}}catch(e){}
+      };
+      const nav=document.querySelector('.frosted');
+      const row=document.createElement('div');
+      row.className='mt-3 flex gap-2 overflow-x-auto';
+      topics.forEach(t=>{
+        const a=document.createElement('a');
+        a.href=pageUrl(t.title);
+        a.textContent=t.title;
+        a.className='px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-sm whitespace-nowrap';
+        row.appendChild(a);
+      });
+      nav.appendChild(row);
+    </script>
+  </body>
+</html>
