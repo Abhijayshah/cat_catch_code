@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cat_Catch_Code – DSA Cheatsheet</title>
+    <script>
+      tailwind = { config: { safelist: [
+        'from-purple-600','to-pink-600',
+        'from-blue-600','to-cyan-600',
+        'from-green-600','to-teal-600',
+        'from-orange-600','to-red-600',
+        'from-indigo-600','to-purple-600',
+        'from-yellow-600','to-orange-600',
+        'from-pink-600','to-rose-600',
+        'from-red-600','to-pink-600',
+        'from-cyan-600','to-blue-600',
+        'from-teal-600','to-green-600',
+        'from-blue-600','to-indigo-600',
+        'from-green-600','to-emerald-600',
+        'from-emerald-600','to-teal-600',
+        'from-orange-600','to-amber-600',
+        'from-violet-600','to-purple-600',
+        'from-fuchsia-600','to-pink-600',
+        'from-sky-600','to-blue-600',
+        'ring-4','ring-yellow-400'
+      ] } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      function ChevronLeft({ size = 32 }) {
+        return (
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        );
+      }
+
+      function ChevronRight({ size = 32 }) {
+        return (
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        );
+      }
+
+      function Download({ size = 20 }) {
+        return (
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15v4a2 2 0 0 1 -2 2H5a2 2 0 0 1 -2 -2v-4" />
+            <path d="M7 10l5 5 5-5" />
+            <path d="M12 15V3" />
+          </svg>
+        );
+      }
+
+      function DSAThumbnails() {
+        const [currentIndex, setCurrentIndex] = React.useState(0);
+
+        const topics = [
+          { title: 'Pattern Printing', subtitle: 'Master Loops & Logic', color: 'from-purple-600 to-pink-600', icon: '🎯', time: '15 min', realLife: 'Building game boards, UI grids' },
+          { title: 'Basics of Programming', subtitle: 'Variables, Operators & Logic', color: 'from-blue-600 to-cyan-600', icon: '💡', time: '15 min', realLife: 'Calculator apps, basic automation' },
+          { title: 'Arrays', subtitle: 'Linear Data Storage', color: 'from-green-600 to-teal-600', icon: '📦', time: '15 min', realLife: 'Shopping carts, playlists' },
+          { title: 'Searching & Sorting', subtitle: 'Binary Search & More', color: 'from-orange-600 to-red-600', icon: '🔍', time: '15 min', realLife: 'Phone contacts, Netflix recommendations' },
+          { title: 'Strings', subtitle: 'Text Processing Magic', color: 'from-indigo-600 to-purple-600', icon: '📝', time: '15 min', realLife: 'Chat apps, search engines' },
+          { title: 'Pointers', subtitle: 'Memory & References', color: 'from-yellow-600 to-orange-600', icon: '🎪', time: '15 min', realLife: 'GPS navigation, memory management' },
+          { title: 'Recursion', subtitle: 'Function Calling Itself', color: 'from-pink-600 to-rose-600', icon: '🔄', time: '15 min', realLife: 'File explorer, factorial calculations' },
+          { title: 'Backtracking', subtitle: 'Trial & Error Approach', color: 'from-red-600 to-pink-600', icon: '🧩', time: '15 min', realLife: 'Sudoku solver, maze navigation' },
+          { title: 'Linked Lists', subtitle: 'Dynamic Data Chains', color: 'from-cyan-600 to-blue-600', icon: '⛓️', time: '15 min', realLife: 'Browser history, train coaches' },
+          { title: 'Stacks', subtitle: 'Last In First Out', color: 'from-teal-600 to-green-600', icon: '📚', time: '15 min', realLife: 'Undo/Redo, plates in cafeteria' },
+          { title: 'Queues', subtitle: 'First In First Out', color: 'from-blue-600 to-indigo-600', icon: '🎫', time: '15 min', realLife: 'Print queue, ticket booking' },
+          { title: 'Binary Trees', subtitle: 'Hierarchical Data', color: 'from-green-600 to-emerald-600', icon: '🌳', time: '15 min', realLife: 'File systems, family trees' },
+          { title: 'Binary Search Trees', subtitle: 'Sorted Tree Structure', color: 'from-emerald-600 to-teal-600', icon: '🔍🌳', time: '15 min', realLife: 'Phone directory, autocomplete' },
+          { title: 'Heaps', subtitle: 'Priority Management', color: 'from-orange-600 to-amber-600', icon: '⛰️', time: '15 min', realLife: 'Task schedulers, hospital ER' },
+          { title: 'Tries', subtitle: 'Prefix Tree Search', color: 'from-violet-600 to-purple-600', icon: '🔤', time: '15 min', realLife: 'Search suggestions, spell checkers' },
+          { title: 'Dynamic Programming', subtitle: 'Optimization Technique', color: 'from-fuchsia-600 to-pink-600', icon: '🧠', time: '15 min', realLife: 'Route planning, stock trading' },
+          { title: 'Graphs', subtitle: 'Network of Nodes', color: 'from-sky-600 to-blue-600', icon: '🕸️', time: '15 min', realLife: 'Social media, Google Maps' }
+        ];
+
+        function nextSlide() {
+          setCurrentIndex((prev) => (prev + 1) % topics.length);
+        }
+
+        function prevSlide() {
+          setCurrentIndex((prev) => (prev - 1 + topics.length) % topics.length);
+        }
+
+        function colorHex(name) {
+          const m = {
+            'purple-600':'#9333EA','pink-600':'#DB2777','blue-600':'#2563EB','cyan-600':'#0891B2','green-600':'#16A34A','teal-600':'#0D9488','orange-600':'#EA580C','red-600':'#DC2626','indigo-600':'#4F46E5','yellow-600':'#CA8A04','rose-600':'#E11D48','emerald-600':'#059669','amber-600':'#D97706','violet-600':'#7C3AED','fuchsia-600':'#C026D3','sky-600':'#0284C7'
+          };
+          return m[name] || '#9333EA';
+        }
+        function parseGradient(c) {
+          const parts = c.split(' ');
+          const from = parts.find(p=>p.startsWith('from-'))?.replace('from-','');
+          const to = parts.find(p=>p.startsWith('to-'))?.replace('to-','');
+          return [colorHex(from), colorHex(to || from)];
+        }
+        function fileUrl(title) {
+          return `thumbnail/${encodeURIComponent(title)}.png`;
+        }
+        function roundRect(ctx, x, y, w, h, r) {
+          ctx.beginPath();
+          ctx.moveTo(x+r, y);
+          ctx.lineTo(x+w-r, y);
+          ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+          ctx.lineTo(x+w, y+h-r);
+          ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+          ctx.lineTo(x+r, y+h);
+          ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+          ctx.lineTo(x, y+r);
+          ctx.quadraticCurveTo(x, y, x+r, y);
+          ctx.closePath();
+        }
+        async function downloadThumbnail(topic) {
+          const url = fileUrl(topic.title);
+          try {
+            const res = await fetch(url, { method: 'HEAD' });
+            if (res.ok) {
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `${topic.title}.png`;
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+              return;
+            }
+          } catch (e) {}
+          const canvas = document.createElement('canvas');
+          const W = 1600, H = 900;
+          canvas.width = W; canvas.height = H;
+          const ctx = canvas.getContext('2d');
+          const [c1, c2] = parseGradient(topic.color);
+          const g = ctx.createLinearGradient(0, 0, W, H);
+          g.addColorStop(0, c1);
+          g.addColorStop(1, c2);
+          ctx.fillStyle = g;
+          ctx.fillRect(0,0,W,H);
+          ctx.fillStyle = 'rgba(255,255,255,0.2)';
+          roundRect(ctx, 80, 80, 260, 70, 35);
+          ctx.fill();
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = 'bold 30px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          ctx.fillText(`${topic.time} Quick Learn`, 110, 125);
+          ctx.font = 'bold 120px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          ctx.textBaseline = 'top';
+          ctx.fillText(topic.icon, W-220, 70);
+          ctx.shadowColor = 'rgba(0,0,0,0.35)';
+          ctx.shadowBlur = 20;
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = '900 120px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          const title = topic.title;
+          const maxWidth = W - 160;
+          let titleFontSize = 120;
+          while (ctx.measureText(title).width > maxWidth && titleFontSize > 48) {
+            titleFontSize -= 4;
+            ctx.font = `900 ${titleFontSize}px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif`;
+          }
+          ctx.fillText(title, 80, 220);
+          ctx.shadowBlur = 0;
+          ctx.fillStyle = 'rgba(255,255,255,0.9)';
+          ctx.font = '700 56px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          ctx.fillText(topic.subtitle, 80, 220 + titleFontSize + 24);
+          ctx.fillStyle = 'rgba(255,255,255,0.2)';
+          roundRect(ctx, 80, 220 + titleFontSize + 24 + 40, W-160, 120, 24);
+          ctx.fill();
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = 'bold 40px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          ctx.fillText('Real Life:', 110, 220 + titleFontSize + 24 + 80);
+          ctx.font = '600 40px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          ctx.fillText(topic.realLife, 280, 220 + titleFontSize + 24 + 80);
+          ctx.fillStyle = 'rgba(255,255,255,0.75)';
+          ctx.font = '600 30px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          ctx.fillText('Follow us on', 80, H-160);
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = '700 44px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          ctx.fillText('@Cat_Catch_Code', 80, H-110);
+          ctx.fillStyle = 'rgba(255,255,255,0.75)';
+          ctx.font = '600 30px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          ctx.fillText('YouTube • Instagram', 80, H-70);
+          ctx.textAlign = 'right';
+          ctx.fillStyle = 'rgba(255,255,255,0.75)';
+          ctx.font = '600 30px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          ctx.fillText('DSA Made Simple', W-80, H-120);
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = '700 40px system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif';
+          ctx.fillText('Not Rocket Science! 🚀', W-80, H-75);
+          ctx.textAlign = 'left';
+          const data = canvas.toDataURL('image/png');
+          const a = document.createElement('a');
+          a.href = data;
+          a.download = `${topic.title.replace(/\s+/g,'_').toLowerCase()}_thumbnail.png`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 p-8">
+            <div className="text-center mb-12">
+              <h1 className="text-5xl font-bold text-white mb-4">DSA Cheatsheet 🐱💻</h1>
+              <p className="text-xl text-purple-300 mb-2">Cat_Catch_Code</p>
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+                Love Babbar's Quality in <span className="text-yellow-400 font-bold">15 Minutes Max!</span>
+                <br />
+                <span className="text-sm text-gray-400">From 1-2 hour lectures to crisp visual learning</span>
+              </p>
+            </div>
+
+            <div className="max-w-5xl mx-auto mb-8">
+              <div className="relative">
+                <div className={`bg-gradient-to-br ${topics[currentIndex].color} rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-105`}>
+                  <img src={fileUrl(topics[currentIndex].title)} alt={topics[currentIndex].title} className="w-full h-auto block" loading="lazy" />
+                </div>
+
+                <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-4 rounded-full transition-all">
+                  <ChevronLeft size={32} />
+                </button>
+                <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-4 rounded-full transition-all">
+                  <ChevronRight size={32} />
+                </button>
+              </div>
+
+              <div className="text-center mt-6">
+                <button onClick={() => downloadThumbnail(topics[currentIndex])} className="bg-white text-purple-900 px-8 py-3 rounded-full font-bold text-lg hover:bg-purple-100 transition-all inline-flex items-center gap-2 shadow-lg">
+                  <Download size={20} />
+                  Download Thumbnail
+                </button>
+              </div>
+
+              <div className="text-center mt-4 text-white">
+                <p className="text-sm opacity-70">{currentIndex + 1} / {topics.length}</p>
+              </div>
+            </div>
+
+            <div className="max-w-6xl mx-auto">
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">All Topics</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {topics.map((topic, index) => (
+                  <button key={index} onClick={() => setCurrentIndex(index)} className={`${index === currentIndex ? 'ring-4 ring-yellow-400' : ''} bg-gradient-to-br ${topic.color} rounded-xl p-4 text-white hover:scale-105 transition-all shadow-lg`}>
+                    <div className="text-3xl mb-2">{topic.icon}</div>
+                    <p className="font-bold text-sm">{topic.title}</p>
+                    <p className="text-xs opacity-80 mt-1">{topic.time}</p>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="max-w-4xl mx-auto mt-12 text-center">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-white">
+                <h3 className="text-2xl font-bold mb-4">Our Mission 🎯</h3>
+                <p className="text-lg leading-relaxed">
+                  We're making DSA accessible to everyone! No more 2-hour confusion.
+                  Just <span className="text-yellow-400 font-bold">15 minutes of crystal-clear visualization</span> and
+                  real-life examples. DSA is just <span className="text-green-400 font-bold">basic maths + logic</span>,
+                  not rocket science! 🚀
+                </p>
+                <p className="mt-4 text-purple-300 font-semibold">Join the Cat_Catch_Code family and master DSA the fun way! 🐱💻</p>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<DSAThumbnails />);
+    </script>
+  </body>
+</html>
