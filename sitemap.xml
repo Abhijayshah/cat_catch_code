@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://catcatchcode.online/</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url><loc>https://catcatchcode.online/topics/01-Pattern%20Printing/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/02-Basics%20of%20Programming/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/03-Arrays/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/04-Searching%20%26%20Sorting/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/05-Strings/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/06-Pointers/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/07-Recursion/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/08-Backtracking/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/09-Linked%20Lists/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/10-Stacks/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/11-Queues/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/12-Binary%20Trees/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/13-Binary%20Search%20Trees/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/14-Heaps/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/15-Tries/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/16-Dynamic%20Programming/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://catcatchcode.online/topics/17-Graphs/index.html</loc><lastmod>2025-11-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>
