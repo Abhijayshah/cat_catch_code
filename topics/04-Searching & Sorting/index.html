@@ -53,6 +53,32 @@
       <div class="mt-10 text-center">
         <a href="../../index.html" class="px-6 py-3 bg-white text-purple-900 rounded-full font-bold text-sm sm:text-base">Back to Home</a>
       </div>
+      <footer class="max-w-7xl mx-auto mt-12">
+        <div class="bg-white/10 rounded-2xl p-6 text-white">
+          <h2 class="text-xl font-bold mb-2">Contact Us</h2>
+          <p class="text-sm">Reach us at <a href="mailto:abhijayshah74@gmail.com" class="underline">abhijayshah74@gmail.com</a></p>
+          <form action="https://formspree.io/f/xwpnwkgz" method="POST" class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="cf_email" class="text-sm">Your email</label>
+              <input id="cf_email" type="email" name="email" required class="mt-1 w-full px-3 py-2 rounded-lg bg-white/20 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="you@example.com" />
+            </div>
+            <div>
+              <label for="cf_name" class="text-sm">Your name</label>
+              <input id="cf_name" type="text" name="name" class="mt-1 w-full px-3 py-2 rounded-lg bg-white/20 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Your name (optional)" />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="cf_message" class="text-sm">Your message</label>
+              <textarea id="cf_message" name="message" required rows="4" class="mt-1 w-full px-3 py-2 rounded-lg bg-white/20 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Tell us what you need"></textarea>
+            </div>
+            <input id="contactPage" type="hidden" name="page" />
+            <input id="contactTopic" type="hidden" name="topic" />
+            <input type="hidden" name="subject" value="CatCatchCode Contact" />
+            <div class="sm:col-span-2">
+              <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-purple-600 hover:bg-purple-500 rounded-full font-bold">Send</button>
+            </div>
+          </form>
+        </div>
+      </footer>
     </div>
     <script src="script.js"></script>
   </body>
