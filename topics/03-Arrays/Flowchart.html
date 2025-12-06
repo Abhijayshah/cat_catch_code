@@ -1,0 +1,370 @@
+import React, { useState } from 'react';
+import { ChevronDown, ChevronRight, Play, Code, Zap } from 'lucide-react';
+
+const NumberOpsFlowchart = () => {
+  const [activeOperation, setActiveOperation] = useState('smallest');
+  const [showCode, setShowCode] = useState(true);
+  const [dryRunStep, setDryRunStep] = useState(0);
+
+  const operations = {
+    smallest: {
+      title: 'Find Smallest Digit',
+      color: 'bg-blue-500',
+      steps: [
+        { text: 'START', type: 'start' },
+        { text: 'Initialize smallest = INT_MAX', type: 'process' },
+        { text: 'num != 0?', type: 'decision' },
+        { text: 'Extract digit = num % 10', type: 'process' },
+        { text: 'digit < smallest?', type: 'decision' },
+        { text: 'smallest = digit', type: 'process' },
+        { text: 'num = num / 10', type: 'process' },
+        { text: 'Return smallest', type: 'end' }
+      ],
+      code: `int smallestDigit(int num) {
+    int smallest = INT_MAX;
+    
+    while (num != 0) {
+        int digit = num % 10;
+        if (digit < smallest) {
+            smallest = digit;
+        }
+        num /= 10;
+    }
+    return smallest;
+}`,
+      example: '58329 → Result: 2',
+      dryRun: [
+        { num: 58329, digit: 9, smallest: 9 },
+        { num: 5832, digit: 2, smallest: 2 },
+        { num: 583, digit: 3, smallest: 2 },
+        { num: 58, digit: 8, smallest: 2 },
+        { num: 5, digit: 5, smallest: 2 }
+      ]
+    },
+    largest: {
+      title: 'Find Largest Digit',
+      color: 'bg-purple-500',
+      steps: [
+        { text: 'START', type: 'start' },
+        { text: 'Initialize largest = INT_MIN', type: 'process' },
+        { text: 'num != 0?', type: 'decision' },
+        { text: 'Extract digit = num % 10', type: 'process' },
+        { text: 'digit > largest?', type: 'decision' },
+        { text: 'largest = digit', type: 'process' },
+        { text: 'num = num / 10', type: 'process' },
+        { text: 'Return largest', type: 'end' }
+      ],
+      code: `int largestDigit(int num) {
+    int largest = INT_MIN;
+    
+    while (num != 0) {
+        int digit = num % 10;
+        if (digit > largest) {
+            largest = digit;
+        }
+        num /= 10;
+    }
+    return largest;
+}`,
+      example: '58329 → Result: 9',
+      dryRun: [
+        { num: 58329, digit: 9, largest: 9 },
+        { num: 5832, digit: 2, largest: 9 },
+        { num: 583, digit: 3, largest: 9 },
+        { num: 58, digit: 8, largest: 9 },
+        { num: 5, digit: 5, largest: 9 }
+      ]
+    },
+    sum: {
+      title: 'Sum of Digits',
+      color: 'bg-green-500',
+      steps: [
+        { text: 'START', type: 'start' },
+        { text: 'Initialize sum = 0', type: 'process' },
+        { text: 'num != 0?', type: 'decision' },
+        { text: 'Extract digit = num % 10', type: 'process' },
+        { text: 'sum = sum + digit', type: 'process' },
+        { text: 'num = num / 10', type: 'process' },
+        { text: 'Return sum', type: 'end' }
+      ],
+      code: `int sumOfDigits(int num) {
+    int sum = 0;
+    
+    while (num != 0) {
+        int digit = num % 10;
+        sum += digit;
+        num /= 10;
+    }
+    return sum;
+}`,
+      example: '58329 → Result: 27',
+      dryRun: [
+        { num: 58329, digit: 9, sum: 9 },
+        { num: 5832, digit: 2, sum: 11 },
+        { num: 583, digit: 3, sum: 14 },
+        { num: 58, digit: 8, sum: 22 },
+        { num: 5, digit: 5, sum: 27 }
+      ]
+    },
+    reverse: {
+      title: 'Reverse Number',
+      color: 'bg-orange-500',
+      steps: [
+        { text: 'START', type: 'start' },
+        { text: 'Initialize rev = 0', type: 'process' },
+        { text: 'num != 0?', type: 'decision' },
+        { text: 'Extract digit = num % 10', type: 'process' },
+        { text: 'rev = rev * 10 + digit', type: 'process' },
+        { text: 'num = num / 10', type: 'process' },
+        { text: 'Return rev', type: 'end' }
+      ],
+      code: `int reverseNumber(int num) {
+    int rev = 0;
+    
+    while (num != 0) {
+        int digit = num % 10;
+        rev = rev * 10 + digit;
+        num /= 10;
+    }
+    return rev;
+}`,
+      example: '58329 → Result: 92385',
+      dryRun: [
+        { num: 58329, digit: 9, rev: 9 },
+        { num: 5832, digit: 2, rev: 92 },
+        { num: 583, digit: 3, rev: 923 },
+        { num: 58, digit: 8, rev: 9238 },
+        { num: 5, digit: 5, rev: 92385 }
+      ]
+    },
+    count: {
+      title: 'Count Digits',
+      color: 'bg-red-500',
+      steps: [
+        { text: 'START', type: 'start' },
+        { text: 'Initialize count = 0', type: 'process' },
+        { text: 'num != 0?', type: 'decision' },
+        { text: 'count = count + 1', type: 'process' },
+        { text: 'num = num / 10', type: 'process' },
+        { text: 'Return count', type: 'end' }
+      ],
+      code: `int countDigits(int num) {
+    int count = 0;
+    
+    while (num != 0) {
+        count++;
+        num /= 10;
+    }
+    return count;
+}`,
+      example: '58329 → Result: 5',
+      dryRun: [
+        { num: 58329, count: 1 },
+        { num: 5832, count: 2 },
+        { num: 583, count: 3 },
+        { num: 58, count: 4 },
+        { num: 5, count: 5 }
+      ]
+    }
+  };
+
+  const currentOp = operations[activeOperation];
+
+  const getShapeClass = (type) => {
+    switch (type) {
+      case 'start':
+      case 'end':
+        return 'rounded-full';
+      case 'decision':
+        return 'transform rotate-45';
+      case 'process':
+      default:
+        return 'rounded-lg';
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white p-6">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          Number Operations DSA Tutorial
+        </h1>
+        <p className="text-center text-gray-400 mb-8">Interactive Flowchart + Code Visualizer</p>
+
+        {/* Operation Tabs */}
+        <div className="flex flex-wrap gap-2 mb-8 justify-center">
+          {Object.keys(operations).map((key) => (
+            <button
+              key={key}
+              onClick={() => {
+                setActiveOperation(key);
+                setDryRunStep(0);
+              }}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                activeOperation === key
+                  ? `${operations[key].color} shadow-lg scale-105`
+                  : 'bg-gray-700 hover:bg-gray-600'
+              }`}
+            >
+              {operations[key].title}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-6">
+          {/* Flowchart Section */}
+          <div className="bg-gray-800 rounded-xl p-6 shadow-2xl">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-bold flex items-center gap-2">
+                <Zap className={`${currentOp.color.replace('bg-', 'text-')}`} />
+                Flowchart
+              </h2>
+              <div className={`px-4 py-2 rounded-lg ${currentOp.color} text-sm font-semibold`}>
+                {currentOp.example}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {currentOp.steps.map((step, idx) => (
+                <div key={idx} className="flex items-center gap-4">
+                  <div className="flex-1">
+                    <div
+                      className={`${getShapeClass(step.type)} ${
+                        step.type === 'decision'
+                          ? 'w-40 h-40 flex items-center justify-center'
+                          : 'p-4'
+                      } ${
+                        step.type === 'start' || step.type === 'end'
+                          ? currentOp.color
+                          : step.type === 'decision'
+                          ? 'bg-yellow-600'
+                          : 'bg-gray-700'
+                      } shadow-lg border-2 border-gray-600 mx-auto max-w-md`}
+                    >
+                      <p
+                        className={`text-center font-semibold ${
+                          step.type === 'decision' ? 'transform -rotate-45 text-sm' : ''
+                        }`}
+                      >
+                        {step.text}
+                      </p>
+                    </div>
+                  </div>
+                  {idx < currentOp.steps.length - 1 && (
+                    <ChevronDown className="text-gray-500 absolute left-1/2 transform translate-y-16" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Code & Dry Run Section */}
+          <div className="space-y-6">
+            {/* Code Section */}
+            <div className="bg-gray-800 rounded-xl p-6 shadow-2xl">
+              <button
+                onClick={() => setShowCode(!showCode)}
+                className="flex items-center justify-between w-full mb-4"
+              >
+                <h2 className="text-2xl font-bold flex items-center gap-2">
+                  <Code className="text-green-400" />
+                  C++ Code
+                </h2>
+                {showCode ? <ChevronDown /> : <ChevronRight />}
+              </button>
+
+              {showCode && (
+                <pre className="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm">
+                  <code className="text-green-300">{currentOp.code}</code>
+                </pre>
+              )}
+            </div>
+
+            {/* Dry Run Section */}
+            <div className="bg-gray-800 rounded-xl p-6 shadow-2xl">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-2xl font-bold flex items-center gap-2">
+                  <Play className="text-blue-400" />
+                  Dry Run (Step {dryRunStep + 1})
+                </h2>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setDryRunStep(Math.max(0, dryRunStep - 1))}
+                    disabled={dryRunStep === 0}
+                    className="px-4 py-2 bg-gray-700 rounded-lg disabled:opacity-50"
+                  >
+                    ←
+                  </button>
+                  <button
+                    onClick={() =>
+                      setDryRunStep(Math.min(currentOp.dryRun.length - 1, dryRunStep + 1))
+                    }
+                    disabled={dryRunStep === currentOp.dryRun.length - 1}
+                    className="px-4 py-2 bg-gray-700 rounded-lg disabled:opacity-50"
+                  >
+                    →
+                  </button>
+                </div>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-gray-700">
+                      {Object.keys(currentOp.dryRun[0]).map((key) => (
+                        <th key={key} className="py-2 px-4 font-semibold text-gray-300">
+                          {key}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentOp.dryRun.map((row, idx) => (
+                      <tr
+                        key={idx}
+                        className={`border-b border-gray-700 ${
+                          idx === dryRunStep ? `${currentOp.color} bg-opacity-20` : ''
+                        }`}
+                      >
+                        {Object.values(row).map((val, i) => (
+                          <td key={i} className="py-2 px-4">
+                            {val}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Key Concepts */}
+            <div className="bg-gradient-to-r from-blue-900 to-purple-900 rounded-xl p-6 shadow-2xl">
+              <h3 className="text-xl font-bold mb-3">💡 Key Concepts</h3>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-yellow-400">•</span>
+                  <span><strong>num % 10</strong> extracts the last digit</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-yellow-400">•</span>
+                  <span><strong>num / 10</strong> removes the last digit</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-yellow-400">•</span>
+                  <span><strong>while (num != 0)</strong> loops through all digits</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-yellow-400">•</span>
+                  <span>Initialize with <strong>INT_MAX/INT_MIN</strong> for comparisons</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NumberOpsFlowchart;
