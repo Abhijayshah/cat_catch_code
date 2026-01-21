@@ -164,3 +164,76 @@ cat_catch_code/
 
 ---
 This document captures the current state, decisions, and actionable next steps to continuously improve Cat Catch Code’s learning experience and discoverability.
+
+// Colors Used
+// =============================================================================
+//
+// 1. GLOBAL BACKGROUNDS
+// -----------------------------------------------------------------------------
+// Main Body Gradient:     bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900
+//
+// 2. TEXT COLORS
+// -----------------------------------------------------------------------------
+// Primary Text:           text-white
+// Secondary/Subtitles:    text-purple-200, text-purple-300
+// Muted/Description:      text-gray-300, text-gray-400
+// Highlight/Accent:       text-yellow-400
+// Inverse Text (on Light):text-purple-900
+// Announcement Text:      text-yellow-200
+//
+// 3. GLASSMORPHISM & PANELS (White Alpha)
+// -----------------------------------------------------------------------------
+// Container Bg:           bg-white/10
+// Details/Summary Bg:     bg-white/5
+// Input/Form Field Bg:    bg-white/20
+// Hover States:           hover:bg-white/10, hover:bg-white/20, hover:bg-white/30
+// Backdrop Blur:          backdrop-blur-sm
+//
+// 4. BUTTONS & INTERACTIVE ELEMENTS
+// -----------------------------------------------------------------------------
+// Primary Action (Send):  bg-purple-600 -> hover:bg-purple-500
+// Secondary Action (White): bg-white -> hover:bg-purple-100 (Text: text-purple-900)
+// Navigation Arrows:      bg-white/20 -> hover:bg-white/30
+//
+// 5. SOCIAL MEDIA BRAND COLORS
+// -----------------------------------------------------------------------------
+// YouTube:                bg-red-600 -> hover:bg-red-500
+// Instagram:              bg-gradient-to-r from-fuchsia-600 via-pink-600 to-orange-500 -> hover:opacity-90
+// GitHub:                 bg-gray-900 -> hover:bg-gray-800
+// LinkedIn:               bg-blue-600 -> hover:bg-blue-500
+//
+// 6. FORM ELEMENTS
+// -----------------------------------------------------------------------------
+// Placeholders:           placeholder-white/60
+// Focus Rings:            focus:ring-purple-400 (ring-2)
+// Focus Outline:          focus:outline-none
+//
+// 7. UTILITY & STATE COLORS
+// -----------------------------------------------------------------------------
+// Announcement Banner:    bg-yellow-500/20 (Bg), border-yellow-400/40 (Border)
+// Code Blocks:            bg-black/40
+// Video Placeholder:      bg-black/30
+// Safelist Ring:          ring-yellow-400
+//
+// 8. TOPIC THUMBNAIL GRADIENTS (Tailwind Safelist)
+// -----------------------------------------------------------------------------
+// Pattern Printing:       from-purple-600 to-pink-600
+// Basics:                 from-blue-600 to-cyan-600
+// Arrays:                 from-green-600 to-teal-600
+// Searching & Sorting:    from-orange-600 to-red-600
+// Strings:                from-indigo-600 to-purple-600
+// Pointers:               from-yellow-600 to-orange-600
+// Recursion:              from-pink-600 to-rose-600
+// Backtracking:           from-red-600 to-pink-600
+// Linked Lists:           from-cyan-600 to-blue-600
+// Stacks:                 from-teal-600 to-green-600
+// Queues:                 from-blue-600 to-indigo-600
+// Binary Trees:           from-green-600 to-emerald-600
+// BST:                    from-emerald-600 to-teal-600
+// Heaps:                  from-orange-600 to-amber-600
+// Tries:                  from-violet-600 to-purple-600
+// DP:                     from-fuchsia-600 to-pink-600
+// Graphs:                 from-sky-600 to-blue-600
+//
+// =============================================================================
+
